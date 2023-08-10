@@ -1,0 +1,31 @@
+body, html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #a5c0ec !important;
+}
+
+.noto {
+  font-family: var(--font-noto-serif);
+}
+
+.overflow-svg-container svg {
+  overflow: visible;
+}
+
+img {
+  user-drag: none;
+  -webkit-user-drag: none;
+}
+
+// this is a patch for layering issues with chakra portals
+
+.modal-floater, .chakra-portal {
+  position: absolute;
+  z-index: 10000000;
+  left: 0;
+  top: 0;
+  overflow: visible;
+  width: 0;
+  height: 0;
+}
