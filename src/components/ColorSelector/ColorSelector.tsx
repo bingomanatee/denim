@@ -46,10 +46,12 @@ export default function ColorSelector(props: ColorSelectorProps) {
 
   return (<div className={styles.container}>
     <VStack alignItems="end">
-      <HStack spacing={0.5} onClick={setFlag.toggle}>
+      <VStack spacing={0.5} onClick={setFlag.toggle}>
         <Image src="/img/icons/colors-flag.svg" width={80} height={40} alt="color menu"/>
-        <Text textAlign="center" size="sm">Filter by color </Text>
-      </HStack>
+        <Text textAlign="center" size="sm"
+        className={os.className}
+        >Find Color </Text>
+      </VStack>
       {flag ? <Box layerStyle="color-flags" data-id="color-flags">
         <Box layerStyle="color-buttons-container" data-id="color buttons container">
           <div className={styles['color-buttons']}>

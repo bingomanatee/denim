@@ -13,13 +13,6 @@ const sm = Space_Mono({
   display: 'swap',
 })
 
-/*
-export const metadata: Metadata = {
-  title: 'DENIM',
-  description: 'The Denim Page',
-}
-*/
-
 export const ns = Noto_Serif({
   weight: '500',
   subsets: ['latin'],

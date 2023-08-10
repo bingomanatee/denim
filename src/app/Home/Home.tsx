@@ -17,7 +17,7 @@ export default function Home() {
     <ChakraProviders>
       <ColorSelector/>
       <VStack id="page-frame" layerStyle="layout-frame">
-        <Heading as="h1" variant="page-head-with-sub">Denim</Heading>
+        <Heading as="h1" variant="page-head-with-sub">Paige Denim</Heading>
         <Heading variant="page-head-sub">Product Catalog</Heading>
         <ViewManagerDisplay />
         <Box layerStyle="page-frame-inner">

@@ -60,10 +60,11 @@ export const inputTheme = makeInputTheme()
 const PAGE_HEAD = {
   as: 'h1',
   fontSize: ['xl', '4xl', '6xl'],
-  fontWeight: 600,
+  fontWeight: 800,
   color: 'blackAlpha.600',
   textAlign: 'center',
   pb: 4,
+  pt: 2,
   textTransform: 'uppercase'
 }
 
