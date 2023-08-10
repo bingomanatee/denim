@@ -1,23 +1,20 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react';
 import styles from './EditProduct.module.scss';
 import stateFactory from './EditProduct.state.ts';
 import useForest from '~/lib/utils/useForest'
 import { ChakraProviders } from '~/components/ChakraProviders'
-import { Box, Text, Input, Textarea, Heading, Button, VStack, HStack } from '@chakra-ui/react'
+import { Box, Text, Input, Textarea, Heading, Button, VStack, HStack, Select } from '@chakra-ui/react'
 import productManager from '~/lib/productManager'
-import { ProductBox } from '~/app/Home/ProductBox'
-import useForestFiltered from '~/lib/utils/useForestFiltered'
-import { c } from '@wonderlandlabs/collect'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { os } from '~/app/layout'
+import { startCase } from 'lodash'
+import { colors } from '~/lib/viewManager'
 
 type EditProductProps = {}
 
 export default function EditProduct(props: EditProductProps) {
-  const { params } = props;
   const router = useRouter();
   const [value, state] = useForest([stateFactory, props, router],
     async (localState) => {
@@ -25,7 +22,7 @@ export default function EditProduct(props: EditProductProps) {
       localState.do.load();
     });
 
-  const { name, description, price, type, id, sku, loaded } = value;
+  const { name, description, price, type, color, sku, loaded } = value;
 
   return (
     <ChakraProviders>
@@ -57,6 +54,20 @@ export default function EditProduct(props: EditProductProps) {
                        state.do.set_type(e.target.value);
                      }
                    }}/>
+
+            <Text as="label" textStyle="label">Color</Text>
+            <Select name="color" value={color}
+                   backgroundColor="white"
+                   onChange={(e) => {
+                     if (loaded) {
+                       console.log('updating color to ', e.target.value);
+                       state.do.set_color(e.target.value);
+                     }
+                   }}>
+              {colors.map((color) => (
+                <option key={color} value={color}>{startCase(color)}</option>
+              ))}
+            </Select>
 
             <Text as="label" textStyle="label">Price</Text>
             <Input name="type" value={price}

@@ -1,4 +1,4 @@
-import { leafI, typedLeaf } from '@wonderlandlabs/forest/lib/types'
+import { typedLeaf } from '@wonderlandlabs/forest/lib/types'
 import productManager from '~/lib/productManager'
 import beep from 'browser-beep';
 
@@ -10,6 +10,7 @@ export type EditProductStateValue = {
   description: string,
   type: string,
   price: number,
+  color: string,
   loaded: boolean
 };
 
@@ -24,6 +25,7 @@ const EditProductState = (props, router) => {
     description: '',
     type: '',
     price: 0,
+    color: 'white',
     loaded: false,
   };
   return {
@@ -38,10 +40,10 @@ const EditProductState = (props, router) => {
         router.push('/');
       },
       save(state) {
-        const {name, description, type, cost, price, sku} = state.value;
+        const {name, description, type, cost, color, price, sku} = state.value;
 
         try {
-          productManager.do.update(sku, {name, price: Number(price), description, type, cost});
+          productManager.do.update(sku, {name, price: Number(price), color, description, type, cost});
         } catch {
           beeper();
           return;
