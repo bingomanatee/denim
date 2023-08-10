@@ -52,7 +52,7 @@ export function ProductBox(props: { sku: string }) {
     <Box layerStyle="product-thumb" className={styles['product-thumb']}>
       <Box layerStyle="contain">
         {product.error ? (<Heading variant="product-heading-error">Error: {sku} not found</Heading>) : (
-          <HStack>
+          <HStack alignItems="flex-start">
             <Box display={showImage?.display || 'none'}>
               <ProductImages images={images}/>
             </Box>
