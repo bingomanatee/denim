@@ -9,22 +9,22 @@ import {image_search} from '~/lib/duckduckgo-images-api-master/src/api';
 
 export async function GET(req, { params }) {
 
-  if (!params?.id) {
-    return NextResponse.json({ apiError: 'no id parameter' })
+  if (!params?.sku) {
+    return NextResponse.json({ apiError: 'no sku parameter' })
   }
 
-  const { id } = params;
-  const idStr = `${id}`;
+  const { sku } = params;
+  const skuStr = `${sku}`;
   try {
-    let product = products.find((p) => `${p.id}` === idStr);
+    let product = products.find((p) => `${p.sku}` === skuStr);
     if (!product) {
-      return NextResponse.json({ error: 'cannot find product', id });
+      return NextResponse.json({ error: 'cannot find product', sku });
     }
     const { name } = product;
-    const result = await image_search({ query: `${name}`, iterations: 1, retries: 2 });
+    const result = await image_search({ query: `Paige Denim ${name}`, iterations: 1, retries: 2 });
     return NextResponse.json(result.slice(0, 4));
   } catch (err) {
-    console.error('error querying for ', id, name, err);
+    console.error('error querying for ', sku, err);
   }
 
   return NextResponse.json({ error: 'irregular response' })

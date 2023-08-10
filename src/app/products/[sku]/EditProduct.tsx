@@ -7,7 +7,7 @@ import useForest from '~/lib/utils/useForest'
 import { ChakraProviders } from '~/components/ChakraProviders'
 import { Box, Text, Input, Textarea, Heading, Button, VStack, HStack } from '@chakra-ui/react'
 import productManager from '~/lib/productManager'
-import { ProductBox } from '~/components/pages/ProductBox'
+import { ProductBox } from '~/app/Home/ProductBox'
 import useForestFiltered from '~/lib/utils/useForestFiltered'
 import { c } from '@wonderlandlabs/collect'
 import { useRouter } from 'next/navigation'
@@ -32,7 +32,7 @@ export default function EditProduct(props: EditProductProps) {
       <VStack id="page-frame" layerStyle="layout-frame">
         <Button onClick={() => router.push('/')}
                 leftIcon={<Image width={30} height={30} alt="home-icon"
-                                 src="/icons/home.svg"/>}
+                                 src="/img/icons/home.svg"/>}
                 variant="home-button">Home</Button>
         <Heading as="h1" variant="page-head-with-sub">Denim</Heading>
         <Heading variant="page-head-sub">Editing Product</Heading>
@@ -84,7 +84,8 @@ export default function EditProduct(props: EditProductProps) {
                 Reset
               </Button>*/}
 
-              <Button onClick={state.do.delete} color="red"  className={os.className}>
+              <Button onClick={state.do.delete} color="red"
+                      className={os.className}>
                 Delete
               </Button>
 

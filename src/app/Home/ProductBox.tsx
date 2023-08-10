@@ -29,9 +29,9 @@ function ProductImages(props: { images: ImageData[] }) {
   </Box>)
 }
 
-export function ProductBox(props: { id: string }) {
+export function ProductBox(props: { sku: string }) {
   const product = useForestFiltered(productManager, (value, state) => {
-    return state.child(props.id);
+    return state.child(props.sku);
   })
 
   // load images fro duckDuckGo if they have not been loaded
@@ -51,55 +51,57 @@ export function ProductBox(props: { id: string }) {
   return (
     <Box layerStyle="product-thumb" className={styles['product-thumb']}>
       <Box layerStyle="contain">
-        {product.error ? (<Heading variant="product-heading-error">Error: {id} not found</Heading>) : (
+        {product.error ? (<Heading variant="product-heading-error">Error: {sku} not found</Heading>) : (
           <HStack>
             <Box display={showImage?.display || 'none'}>
               <ProductImages images={images}/>
             </Box>
-            <div className={styles['product-props']}>
+            <Box>
+              <Heading variant="product-heading">{name}</Heading>
 
-              <Text textStyle="product-label" as="label"
-                    className={pr.className}>
-                id
-              </Text>
-              <Text textStyle="product-value">{id}</Text>
+              <div className={styles['product-props']}>
 
-              <Text textStyle="product-label" as="label"
-                    className={pr.className}>
-                Color
-              </Text>
-              <Text textStyle="product-value">{color}</Text>
+                <Text textStyle="product-label" as="label"
+                      className={pr.className}>
+                  ID
+                </Text>
+                <Text textStyle="product-value">{id}</Text>
 
-              <Text textStyle="product-label" as="label"
-                    className={pr.className}>
-                Price
-              </Text>
-              <Text textStyle="product-value">{formatter.format(price)}</Text>
+                <Text textStyle="product-label" as="label"
+                      className={pr.className}>
+                  Color
+                </Text>
+                <Text textStyle="product-value">{color}</Text>
 
-              <Text textStyle="product-label" as="label"
-                    className={pr.className}>
-                Type
-              </Text>
-              <Text textStyle="product-value">{type}</Text>
+                <Text textStyle="product-label" as="label"
+                      className={pr.className}>
+                  Price
+                </Text>
+                <Text textStyle="product-value">{formatter.format(price)}</Text>
 
-            </div>
+                <Text textStyle="product-label" as="label"
+                      className={pr.className}>
+                  Type
+                </Text>
+                <Text textStyle="product-value">{type}</Text>
+
+              </div>
+            </Box>
           </HStack>
         )}
-        <Heading variant="product-heading">{name}</Heading>
         <Text textStyle="product-description">{description}</Text>
       </Box>
       <Box layerStyle="edit-button" className={styles['pop-up']}
            onClick={() => router.push('/products/' + sku)}>
-        <Image src="/icons/edit-icon.svg" className={styles['edit-icon']}
+        <Image src="/img/icons/edit-icon.svg" className={styles['edit-icon']}
                alt="edit-icon" height={60} width={105}/>
         <Text as="label" className={os.className} textStyle="overlay-text">Edit</Text>
       </Box>
       <Box layerStyle="destroy-button" style={{
         filter: 'hue-rotate(120deg)'
       }} className={styles['pop-up']}
-           onClick={() => productManager.do.delete(id)}>
-        <Image src="/icons/edit-icon.svg"
-
+           onClick={() => productManager.do.delete(sku)}>
+        <Image src="/img/icons/edit-icon.svg"
                className={styles['edit-icon']} alt="edit-icon" height={60} width={105}/>
         <Text as="label" className={os.className} textStyle="overlay-text">Delete</Text>
       </Box>

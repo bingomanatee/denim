@@ -34,14 +34,14 @@ const EditProductState = (props, router) => {
 
     actions: {
       delete(state) {
-        productManager.do.delete(state.value.id);
+        productManager.do.delete(state.value.sku);
         router.push('/');
       },
       save(state) {
-        const {name, description, type, cost, price, id} = state.value;
+        const {name, description, type, cost, price, sku} = state.value;
 
         try {
-          productManager.do.update(id, {name, price: Number(price), description, type, cost});
+          productManager.do.update(sku, {name, price: Number(price), description, type, cost});
         } catch {
           beeper();
           return;

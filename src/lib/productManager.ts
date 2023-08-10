@@ -60,17 +60,17 @@ const productActions = {
   },
 
   async fetchImage(state: leafI) {
-    const { name, id } = state.value;
+    const { name, sku } = state.value;
     //@TODO: load groups of images;
     state.do.set_images([]); // to prevent double loading
     if (!name) {
       return;
     }
     try {
-      const { data } = await axios.get('/api/product_image/' + id);
+      const { data } = await axios.get('/api/product_image/' + sku);
       state.do.set_images(data);
     } catch (err) {
-      console.error('error querying for ', id, name, err);
+      console.error('error querying for ', sku, name, err);
     }
   }
 
@@ -83,17 +83,18 @@ const productSelectors = {
   }
 }
 
+
 const productManager = new Forest({
   $value: new Map(),
   actions: {
-    delete(state: leafI, id: string) {
-      const child = state.child(id);
+    delete(state: leafI, sku: string) {
+      const child = state.child(sku);
       if (child){
         child.do.set_deleted(true);
       }
     },
-    update(state: leafI, id: string, updates: Partial<RawProduct>) {
-      const child = state.child(id);
+    update(state: leafI, sku: string, updates: Partial<RawProduct>) {
+      const child = state.child(sku);
       if (child){
         child.value = {...child.value, ...updates};
 
@@ -106,12 +107,14 @@ const productManager = new Forest({
       }
     },
     load(state: leafI) {
+      let colors = new Set();
       data.forEach((record: RawProduct) => {
         if (!record?.id) {
           console.error('record has no id', record);
           return;
         }
-        if (!state.child(record.id)) {
+        colors.add(record.color);
+        if (!state.child(record.sku)) {
           // child.do.validate();
           try {
             state.addChild({
@@ -124,12 +127,13 @@ const productManager = new Forest({
               },
               actions: productActions,
               selectors: productSelectors,
-            }, record.id);
+            }, record.sku);
           } catch (err) {
             console.error('error adding child', data, record.id);
           }
         }
       });
+
     },
   },
   selectors: {

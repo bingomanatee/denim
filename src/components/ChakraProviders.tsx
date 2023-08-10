@@ -95,6 +95,46 @@ const COLORS = {
   'inactive-button': 'hsl(150,20%,33%)',
 };
 
+const HEADINGS = {
+  'view-manager-label': {
+    fontSize: ['sm', 'md', 'md'],
+    textAlign: 'center',
+    p: 0,
+    mt: 0,
+    mb: 1,
+    fontWeight: 500,
+  },
+  'page-head': {
+    ...PAGE_HEAD
+  },
+  'page-head-with-sub': {
+    ...PAGE_HEAD,
+    pb: 0,
+    lineHeight: 0.8,
+    m: 0
+
+  },
+  'page-head-sub': {
+    ...PAGE_HEAD,
+    fontSize: ['lg', 'lg', 'xl'],
+    fontWeight: 400,
+    p: 0,
+    m: 0,
+    size: 'sm',
+  },
+  'product-edit-head': {
+    fontSize: ['lg', '2xl', '3xl'],
+    textAlign: 'center',
+    mb: 4
+  },
+  'product-heading': {
+    fontSize: 'sm',
+    fontWeight: 800,
+    noOfLines: 1,
+    textAlign: 'center',
+    mt: 2
+  }
+}
 const COMPONENTS = {
   Tabs: tabsTheme,
   Button: {
@@ -215,38 +255,7 @@ const COMPONENTS = {
     baseStyle: {
       className: pr.className,
     },
-    variants: {
-      'page-head': {
-        ...PAGE_HEAD
-      },
-      'product-edit-head': {
-        fontSize: ['lg', '2xl', '3xl'],
-        textAlign: 'center',
-        mb: 4
-      },
-      'page-head-sub': {
-        ...PAGE_HEAD,
-        fontSize: 'lg',
-        fontWeight: 400,
-        p: 0,
-        m: 0,
-        size: 'sm',
-      },
-      'page-head-with-sub': {
-        ...PAGE_HEAD,
-        pb: 0,
-        lineHeight: 1,
-        m: 0
-
-      },
-      'product-heading': {
-        fontSize: 'sm',
-        fontWeight: 800,
-        noOfLines: 1,
-        textAlign: 'center',
-        mt: 2
-      }
-    }
+    variants: HEADINGS
   },
   Text: {},
   Avatar: {
@@ -274,6 +283,21 @@ const TEXT_STYLES = {
     textAlign: 'center',
     lineHeight: '60px',
     zIndex: 10,
+  },
+  'color-chooser-label': {
+    fontSize: 'lg',
+    textAlign: 'center',
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    lineHeight: '38px',
+    color: 'white',
+    shadow: 'dark',
+    _hover: {
+      color: 'accent'
+    }
   },
   'atb-title-sub': {
     m: 0,
@@ -389,6 +413,43 @@ const LAYER_STYLES = {
     as: "header",
     zIndex: 100000,
   },
+  'color-flags': {
+    mt: 2,
+    width: '770px',
+    zIndex: 50,
+    position: 'relative',
+  },
+  "color-chooser-overlay": {
+    width: '90px',
+    height: '40px',
+    mr: '8px',
+    justify: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    flex: 0,
+    display: 'block',
+    position: 'relative',
+    overflow: 'visible',
+    boxShadow: 'md',
+    p: 0
+  },
+  'color-buttons': {
+    width: '770px',
+    height: '80px',
+    overflow: 'hidden',
+    position: 'absolute',
+    left: 0,
+    top: 0,
+  },
+  'color-buttons-container': {
+    borderColor: 'black',
+    p: 4,
+    backgroundColor: 'white',
+    boxShadow: 'lg',
+    zIndex: 100,
+    position: 'absolute',
+    width: '730px',
+  },
   'product-thumb': {
     borderColor: 'blackAlpha.400',
     position: 'relative',
@@ -408,13 +469,13 @@ const LAYER_STYLES = {
   },
   'edit-button': {
     position: 'absolute',
-    top: [0, 0, -2],
-    left: [0, 0, -2],
+    bottom: [0, 0, -2],
+    right: [0, 0, -2],
   },
   'destroy-button': {
     position: 'absolute',
     bottom: [0, 0, -2],
-    right: [0, 0, -2],
+    left: [0, 0, -2],
   },
   'product-image': {
     display: 'block',
